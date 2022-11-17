@@ -23,20 +23,43 @@ export function NoteForm({
     const markdownRef = useRef<HTMLTextAreaElement>(null)
     const [selectedTags, setSelectedTags] = useState<Tag[]>(tags)
     const navigate = useNavigate()
+
+
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        onSubmit({
+            title: titleRef.current!.value,
+            markdown: markdownRef.current!.value,
+            tags: tags
+        })
+    }
+
     return (
-       <Form>
+       <Form onSubmit={handleSubmit}>
            <Stack gap={4}>
                <Row>
                    <Col>
                        <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control required/>
+                            <Form.Control required ref={titleRef}/>
                        </Form.Group>
                    </Col>
                    <Col>
                        <Form.Group controlId="tags">
                            <Form.Label>Tags</Form.Label>
                            <CreatableReactSelect
+                               value={selectedTags.map(tag => {
+                                   return { label: tag.label, value: tag.id }
+                               })}
+
+                               onChange={tags => {
+                                   setSelectedTags(
+                                       tags.map(tag => {
+                                           return { label: tag.label, id: tag.value }
+                                       })
+                                   )
+                               }}
+
                                isMulti
                            />
                        </Form.Group>
