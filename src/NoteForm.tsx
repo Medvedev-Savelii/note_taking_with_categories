@@ -30,8 +30,10 @@ export function NoteForm({
         onSubmit({
             title: titleRef.current!.value,
             markdown: markdownRef.current!.value,
-            tags: tags
+            tags: selectedTags
         })
+
+        navigate("..")
     }
 
     return (
@@ -48,6 +50,13 @@ export function NoteForm({
                        <Form.Group controlId="tags">
                            <Form.Label>Tags</Form.Label>
                            <CreatableReactSelect
+
+                               onCreateOption={label => {
+                                   const newTag = { id: uuidV4(), label }
+                                   onAddTag(newTag)
+                                   setSelectedTags(prev => [...prev, newTag])
+                               }}
+
                                value={selectedTags.map(tag => {
                                    return { label: tag.label, value: tag.id }
                                })}
