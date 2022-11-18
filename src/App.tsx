@@ -7,7 +7,7 @@ import { useLocalStorage } from "./useLocalStorage"
 import { v4 as uuidV4 } from "uuid"
 import Note from "./Note"
 import EditNote from "./EditNote";
-import NoteList from "./NoteList";
+import {NoteList} from "./NoteList";
 
 
 
@@ -61,6 +61,15 @@ function App() {
     }
 
 
+    function onUpdateTag() {
+
+    }
+
+    function onDeleteTag() {
+
+    }
+
+    let availableTags;
     return (
       <Container className="my-4">
           <Routes>
@@ -68,6 +77,10 @@ function App() {
                   path="/"
                   element={
                       <NoteList
+                          notes={notes}
+                          onUpdateTag={onUpdateTag}
+                          onDeleteTag={onDeleteTag}
+                          availableTags={tags}
                       />
                   }
               />
