@@ -5,9 +5,10 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import { NewNote } from "./NewNote"
 import { useLocalStorage } from "./useLocalStorage"
 import { v4 as uuidV4 } from "uuid"
-import Note from "./Note"
 import EditNote from "./EditNote";
 import {NoteList} from "./NoteList";
+import {NoteLayout} from "./NoteLayout";
+import { Note } from "./Note"
 
 
 
@@ -68,7 +69,9 @@ function App() {
     function onDeleteTag() {
 
     }
+    function onDelete() {
 
+    }
     let availableTags;
     return (
       <Container className="my-4">
@@ -77,7 +80,7 @@ function App() {
                   path="/"
                   element={
                       <NoteList
-                          notes={notes}
+                          notes={notesWithTags}
                           onUpdateTag={onUpdateTag}
                           onDeleteTag={onDeleteTag}
                           availableTags={tags}
@@ -93,8 +96,8 @@ function App() {
                            availableTags={tags}/>
                   }
               />
-              <Route path="/:id">
-                  <Route index element={<Note/>} />
+              <Route path="/:id" element={<NoteLayout notes={notesWithTags}/>}>
+                  <Route index element={<Note onDelete={onDelete}/>} />
                   <Route
                       path="edit"
                       element={

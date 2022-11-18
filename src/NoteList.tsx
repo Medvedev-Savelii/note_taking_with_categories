@@ -70,7 +70,7 @@ export function NoteList({
                </Col>
            </Row>
             <Form>
-                <Row>
+                <Row  className="mb-4">
                 <Col>
                     <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
@@ -128,19 +128,19 @@ function NoteCard({ id, title, tags }: SimplifiedNote) {
                     className="align-items-center justify-content-center h-100"
                 >
                     <span className="fs-5">{title}</span>
-                    {/*{tags.length > 0 && (*/}
-                    {/*    <Stack*/}
-                    {/*        gap={1}*/}
-                    {/*        direction="horizontal"*/}
-                    {/*        className="justify-content-center flex-wrap"*/}
-                    {/*    >*/}
-                    {/*        {tags.map(tag => (*/}
-                    {/*            <Badge className="text-truncate" key={tag.id}>*/}
-                    {/*                {tag.label}*/}
-                    {/*            </Badge>*/}
-                    {/*        ))}*/}
-                    {/*    </Stack>*/}
-                    {/*)}*/}
+                    {tags.length > 0 && (
+                        <Stack
+                            gap={1}
+                            direction="horizontal"
+                            className="justify-content-center flex-wrap"
+                        >
+                            {tags.map(tag => (
+                                <Badge className="text-truncate" key={tag.id}>
+                                    {tag.label}
+                                </Badge>
+                            ))}
+                        </Stack>
+                    )}
                 </Stack>
             </Card.Body>
         </Card>
